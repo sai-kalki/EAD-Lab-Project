@@ -30,11 +30,13 @@
           <a href="#!" class="brand-logo logo-font">&nbsp &nbsp &nbspBILLBOARD</a>
           <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
           <ul class="right hide-on-med-and-down">
-            <li><a href="sass.html">Home</a></li>
-            <li><a href="sass.html">Downloads</a></li>
-            <li><a href="badges.html">Invoices</a></li>
-            <li><a href="collapsible.html">Cart<span style="color: white;" class="badge red">4</span></a></li>
-            <li><a href="mobile.html">Logout</a></li>
+            <li><a href="{{url_for("home")}}">Home</a></li>
+            <li><a href="{{url_for("account")}}">Account</a></li>
+            <li><a href="{{url_for("invoice")}}">Invoices</a></li>
+            <li><a href="{{url_for("bill")}}">Bills</a></li>
+            <li><a href="{{url_for("addItems")}}">AddItems</a></li>
+            <li><a href="{{url_for("cartdetails")}}">Cart</a></li>
+            <li><a href="{{url_for("logout")}}">Logout</a></li>
           </ul>
         </div>
       </nav>
@@ -42,11 +44,13 @@
     
       <ul class="sidenav" id="mobile-demo">
             <a href="#!" class="brand-logo logo-font mobile-logo" > &nbsp BILLBOARD</a>
-            <li><a href="sass.html">Home</a></li>
-            <li><a href="sass.html">Downloads</a></li>
-            <li><a href="badges.html">Invoices</a></li>
-            <li><a href="collapsible.html">Cart<span style="color: white" class="badge red">4</span></a></li>
-            <li><a href="mobile.html">Logout</a></li>
+            <li><a href="{{url_for("home")}}">Home</a></li>
+            <li><a href="{{url_for("account")}}">Account</a></li>
+            <li><a href="{{url_for("invoice")}}">Invoices</a></li>
+            <li><a href="{{url_for("bill")}}">Bills</a></li>
+            <li><a href="{{url_for("addItems")}}">AddItems</a></li>
+            <li><a href="{{url_for("cartdetails")}}">Cart</a></li>
+            <li><a href="{{url_for("logout")}}">Logout</a></li>
       </ul>
 
 

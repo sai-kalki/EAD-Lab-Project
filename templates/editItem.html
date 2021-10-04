@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-     <!-- jquery -->
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <!-- materialize -->
     <link rel="stylesheet" href="../static/css/style.css">
     <link rel="stylesheet" href="../static/css/materialize.min.css">
@@ -18,11 +18,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600&display=swap" rel="stylesheet">
-
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <title>My Account</title>
+    <title>Edit Item Details</title>
 </head>
 <body>
     <nav>
@@ -53,51 +52,74 @@
             <li><a href="{{url_for("logout")}}">Logout</a></li>
       </ul>
 
-      <div class="container" style="margin-top: 50px;">
-            <div class="row">
-                <div class="col s12 m5 l5">
-                    <img class="materialboxed image-effect-1" width="100%" height="100%" src="../static/images/dp.jpg">
-                </div>
-                <div class="col s12 m6 offset-m1 l6 offset-l1 profile-data">
-                    <form action="" method="POST">
-              
-                        <p style="color:white;margin-bottom:35px;text-align:center;">{{ Invalid_Credentials }}</p>
-                        
-                        <div class="input-field white-text">
-                        <input class="white-text" placeholder="" id="first_name" name="username" type="text" class="validate" autocomplete="off" value={{uname}}>
-                        <label for="first_name">Organisation Name</label>
-                        </div>
 
-                        <div class="input-field">
-                            <input class="white-text" name="email" placeholder="" id="email" type="email" class="validate" autocomplete="off" value={{email}}>
-                            <label for="email">Email</label>
-                        </div>
 
-                        <div class="input-field">
-                            <input class="white-text" placeholder="" id="categories" name="categories" type="text" class="validate" autocomplete="off" value={{categories}}>
-                            <label for="categories">Categories(Separate with ",")</label>
-                        </div>
-                        
-                        <div class="input-field">
-                        <input class="white-text" id="password" placeholder="" type="password" name="password" class="validate" autocomplete="off" value={{pw}}>
-                        <label for="password">Password</label>
-                        </div>
-          
-                        <br>
-                        <button class="btn waves-effect waves-light purple lighten-1 profile-btn" type="button" name="action">Upload Image</button>
-                        <button class="btn waves-effect waves-light purple lighten-1 profile-btn" type="submit" name="action">Save Profile</button>
-                        <br>
-                        <br>
-                        </form>
-                       
-                </div>
+    <div class="container">
+
+        <div class="row">
+            <div class="col s12">
+              <ul class="tabs">
+                <li class="tab col s12" ><a  class="active" href="#test2" style="color: darkorchid;">Edit Item Details</a></li>
+                
+              </ul>
             </div>
-      </div>
-    
+            
+            <div id="test2" class="col s12 item-data">
+                <form method="POST">
+                <div class="input-field">
+                    <input placeholder="" id="Product_Name" name="Product_Name" type="text" class="validate" autocomplete="off">
+                    <label for="Product_Name">Product Name</label>
+                    </div>
+
+                    <div class="input-field">
+                        <select id="category" name="category" autocomplete="off">
+                            <option value="" disabled selected>Choose your option</option>
+                            {% for category in categories %}
+                            <option value={{category}}>{{category}}</option>
+                            {% endfor %}
+                          </select>
+                          <label for="category">Category</label>
+                    </div>
+
+                    <div class="input-field">
+                        <input id="price" name="price" type="text" class="validate" autocomplete="off">
+                        <label for="price">Price</label>
+                    </div>
+                    
+                    <div class="input-field">
+                        <input id="discount" name="discount" type="text" class="validate" autocomplete="off">
+                        <label for="discount">Discount</label>
+                    </div>
+      
+                    <br>
+                    <button class="btn waves-effect waves-light purple lighten-1 item-btn" type="submit" name="action">Edit item</button>
+                    <br>
+                  </form>
+                </div>
+                <br><br><br>
+
+
+            </div>
+           
+            
+
+
+          </div>
+        </div>
+    </div>
+
+
 
     <script src="../static/js/init.js"></script>
     <script src="../static/js/materialize.js"></script>
     <script src="../static/js/materialize.min.js"></script>
     <script src="../static/js/myjavascript.js"></script>
+    <script>
+
+          $(document).ready(function(){
+            $('.sidenav').sidenav();
+          });
+
+    </script>
 </body>
 </html>

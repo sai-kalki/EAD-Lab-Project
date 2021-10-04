@@ -59,8 +59,8 @@
         <div class="row">
             <div class="col s12">
               <ul class="tabs">
-                <li class="tab col s6" ><a  class="active" href="#test1" style="color: darkorchid;">Invoices sent</a></li>
-                <li class="tab col s6"><a href="#test2" style="color: darkorchid;">Invoices Received</a></li>
+                <li class="tab col s6" ><a  class="active" href="#test1" style="color: darkorchid;">Bills sent</a></li>
+                <li class="tab col s6"><a href="#test2" style="color: darkorchid;">Bills Received</a></li>
                 
               </ul>
             </div>
@@ -68,7 +68,7 @@
               {% for store in Isent %}
                 <ul class="collapsible">
                     <li>
-                      <div class="collapsible-header"><i class="material-icons">domain</i>{{store["receiver"]}}<span style="color:green" class="badge">{{store["status"]}}</span></div>
+                      <div class="collapsible-header"><i class="material-icons">domain</i>{{store["receiver"]}}<span class="badge"><a class="waves-effect waves-light btn">button</a></span></div>
                       <div class="collapsible-body">
                         <table class="highlight responsive-table table-background centered">
                           <thead>

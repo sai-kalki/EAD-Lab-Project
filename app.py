@@ -256,6 +256,9 @@ def invoice():
 def deleteInv(id):
     if "orgoid" in session:
         orgoid = session["orgoid"]
+        users.update_one({"_id":orgoid},{"$set":{"Isent":users.find_one({"_id":orgoid})["Isent"]-1}})
+        rid = invoices.find_one({"_id":id,"sid":orgoid})["rid"]
+        users.update_one({"_id":rid},{"$set":{"Irec":users.find_one({"_id":rid})["Irec"]-1}})
         invoices.delete_one({"sid":orgoid,"_id":id})
         return redirect(url_for("invoice"))
     else:
