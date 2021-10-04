@@ -157,14 +157,12 @@ def addItems():
         categories = user["categories"].strip().split(',')
         item_lists = items.find({"uid":id})
         if request.method=="POST":
-            itemcount = user["itemcount"] + 1
             name = request.form["Product_Name"]
             category = request.form.get("category")
             price = int(request.form["price"])
             discount = int(request.form["discount"])
             pid = category[0:3] + str(randint(0,999))
             items.insert_one({"_id":pid,"uid":id,"product_name":name,"category":category,"price":price,"discount":discount})
-            users.update_one({"_id":id},{"$set":{"itemcount":itemcount}})
             return redirect(url_for("addItems"))
         else:
             return render_template("addItems.html",categories=categories,item_lists=item_lists)
@@ -248,15 +246,30 @@ def invoice():
             Inv["id"] = store["_id"]
             if Inv["status"]!="Declined":
                 Invr.append(Inv)
+        Invs.reverse()
+        Invr.reverse()
         return render_template("invoices.html",Isent=Invs,Irec=Invr)
     else:
         return redirect(url_for("login"))
+
+@app.route("/deleteInv/<id>")
+def deleteInv(id):
+    if "orgoid" in session:
+        orgoid = session["orgoid"]
+        invoices.delete_one({"sid":orgoid,"_id":id})
+        return redirect(url_for("invoice"))
+    else:
+        return redirect(url_for("login"))
+
 
 @app.route("/accept/<id>")
 def accept(id):
     if "orgoid" in session:
         orgoid = session["orgoid"]
         bills.insert_one(invoices.find_one({"_id":id,"rid":orgoid}))
+        users.update_one({"_id":orgoid},{"$set":{"Brec":users.find_one({"_id":orgoid})["Brec"]+1}})
+        sid = invoices.find_one({"_id":id,"rid":orgoid})["sid"]
+        users.update_one({"_id":sid},{"$set":{"Bsent":users.find_one({"_id":sid})["Bsent"]+1}})
         invoices.delete_one({"_id":id,"rid":orgoid})
         return redirect(url_for("invoice"))
     else:
@@ -277,6 +290,9 @@ def recart(id):
         orgoid = session["orgoid"]
         cart.delete_one({"uid":orgoid})
         cartitems = invoices.find_one({"_id":id,"sid":orgoid})
+        users.update_one({"_id":orgoid},{"$set":{"Isent":users.find_one({"_id":orgoid})["Isent"]-1}})
+        rid = invoices.find_one({"_id":id,"sid":orgoid})["rid"]
+        users.update_one({"_id":rid},{"$set":{"Irec":users.find_one({"_id":rid})["Irec"]-1}})
         invoices.delete_one({"_id":id,"sid":orgoid})
         cartitems.pop("total")
         cartitems.pop("time")
@@ -328,6 +344,8 @@ def cartdetails():
                 inv["time"] = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
                 inv["status"] = "Active"
                 invoices.insert_one(inv)
+                users.update_one({"_id":inv["sid"]},{"$set":{"Isent":users.find_one({"_id":inv["sid"]})["Isent"] + 1}})
+                users.update_one({"_id":inv["rid"]},{"$set":{"Irec":users.find_one({"_id":inv["sid"]})["Irec"] + 1}})
                 cart.delete_one({"uid":id})
                 return redirect(url_for('cartdetails'))
         else:
