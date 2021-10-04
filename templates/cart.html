@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <!-- jquery -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- materialize -->
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/materialize.min.css">
+    <link rel="stylesheet" href="../static/css/materialize.css">
+    <link rel="stylesheet" href="../static/css/main.css">
+
+     <!-- Title logo font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <!-- Other font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600&display=swap" rel="stylesheet">
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <title>Cart</title>
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper navbar-efx">
+          <a href="#!" class="brand-logo logo-font">&nbsp &nbsp &nbspBILLBOARD</a>
+          <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="{{url_for("home")}}">Home</a></li>
+            <li><a href="{{url_for("account")}}">Account</a></li>
+            <li><a href="{{url_for("invoice")}}">Invoices</a></li>
+            <li><a href="{{url_for("bill")}}">Bills</a></li>
+            <li><a href="{{url_for("addItems")}}">AddItems</a></li>
+            <li><a href="{{url_for("cartdetails")}}">Cart</a></li>
+            <li><a href="{{url_for("logout")}}">Logout</a></li>
+          </ul>
+        </div>
+      </nav>
+      <br>
+    
+      <ul class="sidenav" id="mobile-demo">
+            <a href="#!" class="brand-logo logo-font mobile-logo" > &nbsp BILLBOARD</a>
+            <li><a href="{{url_for("home")}}">Home</a></li>
+            <li><a href="{{url_for("account")}}">Account</a></li>
+            <li><a href="{{url_for("invoice")}}">Invoices</a></li>
+            <li><a href="{{url_for("bill")}}">Bills</a></li>
+            <li><a href="{{url_for("addItems")}}">AddItems</a></li>
+            <li><a href="{{url_for("cartdetails")}}">Cart</a></li>
+            <li><a href="{{url_for("logout")}}">Logout</a></li>
+      </ul>
+
+
+
+      <br>
+      <div class="container">
+        {% if Notfound %}
+            <p style="color: white;text-align:center"> There are no items found in the cart </p>
+        {% else %}
+        <form method="POST">
+          <p style="color: white;text-align:center">{{alt}}</p>
+        <div class="input-field col s6">
+            <input placeholder="" style="color:white" name="orgo_name" id="orgo_name" type="text" class="validate">
+            <label for="orgo_name">Enter the Organisation Name</label>
+          </div>
+          <br>
+        <table class="highlight responsive-table table-background centered">
+            <thead>
+            <tr class="table-header">
+                <th>Product Id</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Amount</th>
+
+            </tr>
+            </thead>
+    
+            <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{item["_id"]}}</td>
+                <td>{{item["name"]}}</td>
+                <td>{{item["price"]}}</td>
+                <td>
+                  <a href="{{url_for('decrement',pid=item['_id'])}}" class="red waves-effect waves-light btn bgcolor-red"><i class="material-icons">remove</i></a>
+                  &nbsp {{item["quantity"]}} &nbsp
+                  <a href="{{url_for('increment',pid=item['_id'])}}" class="green waves-effect waves-light btn bgcolor-red"><i class="material-icons">add</i></a>
+                </td>
+                <td>{{item["total"]}}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>Total Amount</td>
+              <td>{{total}}</td>
+            </tr>
+            </tbody>
+
+        </table> 
+        <br><br>     
+          <div style="text-align: center;">
+            <a href="{{url_for('deleteCart')}}" class="red waves-effect waves-light btn bgcolor-red">Delete cart</a>
+            <button class="btn green waves-effect waves-light" style="font-family:'Josefin Sans';" type="submit" name="action">Invoice it!</button>
+          </div> 
+        {% endif %}
+      </div>
+    </form>       
+
+      <script src="../static/js/init.js"></script>
+      <script src="../static/js/materialize.js"></script>
+      <script src="../static/js/materialize.min.js"></script>
+      <script src="../static/js/myjavascript.js"></script>
+      <script type="text/javascript">
+        $(function() {
+           $('.ajax-link').click( function() {
+                 $.get( $(this).attr('href'), function(msg) {
+                      alert( "Data Saved: " + msg );
+                 });
+                 return false; // don't follow the link!
+           });
+        });
+        </script>
+  </body>
+  </html>

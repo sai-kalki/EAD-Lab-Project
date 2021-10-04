@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- materialize -->
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/materialize.min.css">
+    <link rel="stylesheet" href="../static/css/materialize.css">
+    <link rel="stylesheet" href="../static/css/main.css">
+
+     <!-- Title logo font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <!-- Other font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600&display=swap" rel="stylesheet">
+
+
+    <title>Register your account</title>
+</head>
+<body>
+    
+    <div class="row valign-wrapper" style="margin-top:1%">
+      <!-- offset-s1 offset-m2 offset-l2 center-align -->
+      <div class="col l2 s2 m2 offset-s1 offset-m1 offset-l1 center-align logo" style="margin-top:0%">
+          <h1 class="product-logo">BILLBOARD</h1>
+      </div>
+      <!-- offset-s1 offset-m3 offset-l7 -->
+         <div class="col l4 s10 m6 center-align login-card">
+          <div class="card white darken-6 z-depth-5" >
+            <div class="card-content Black-text">
+              <span class="card-title">Register your Account</span>
+              <p></p>
+            </div>
+            <div class="card-action">
+              <form action="" method="post">
+              
+              <p style="color:red;margin-bottom:35px;">{{ Invalid_Credentials }}</p>
+              
+              <div class="input-field">
+              <input placeholder="" id="first_name" name="username" type="text" class="validate" value={{username}}>
+              <label for="first_name">Organisation Name</label>
+              </div>
+
+              <div class="input-field">
+                <input id="email" name="email" type="email" class="validate" value={{email}}>
+                <label for="email">Email Id</label>
+                </div>
+              
+              <div class="input-field">
+              <input id="password" type="password" name="password" class="validate" value={{password}}>
+              <label for="password">Password</label>
+              </div>
+
+              <div class="input-field">
+                <input id="confirm" type="password" name="confirm" class="validate">
+                <label for="confirm">Confirm Password</label>
+              </div>
+
+              <br>
+              <button class="btn waves-effect waves-light purple lighten-1" type="submit" name="action">Register</button>
+              <br>
+              <br>
+              </form>
+              
+              <a href="{{url_for('login')}}">Already Logged in?</a>
+    
+            </div>
+          </div>
+        </div>
+      </div> 
+    
+
+
+
+
+
+
+    <script src="../static/js/init.js"></script>
+    <script src="../static/js/materialize.js"></script>
+    <script src="../static/js/materialize.min.js"></script>
+    <script src="../static/js/myjavascript.js"></script>
+</body>
+</html>

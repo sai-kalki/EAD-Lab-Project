@@ -1,0 +1,181 @@
+*{
+    margin: 0;
+	padding: 0;
+	/* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
+	font-family: 'Josefin Sans', sans-serif;
+}
+
+body{
+	background-color: darkorchid;
+}
+.bgcolor-blue{
+	background-color: darkorchid;
+}
+
+.product-logo{
+	font-family: 'Bebas Neue', cursive;
+	color: white;
+	font-size: 150px;
+}
+.logo-font{
+	font-family: 'Bebas Neue', cursive;
+}
+/* font-family: 'Bebas Neue', cursive; */
+
+.login-card{
+	margin-right: 30px;
+}
+
+.navbar-efx{
+	background-color: white;
+	
+}
+.navbar-efx a{
+	color: darkorchid;
+}
+
+.table-background{
+	background-color: white;
+}
+
+.table-header{
+	background-color: ghostwhite;
+}
+
+.items-add-card{
+	position: fixed;
+	top:20px;
+	right:10px;
+	width:360px;
+}
+
+.mobile-logo{
+	text-align: center;
+	color: darkorchid;
+	font-family: 'Bebas Neue', cursive;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-size: xx-large;
+}
+
+.image-effect-1{
+	border-radius: 55%;
+}
+
+.changeimg{
+	margin-left:250px;
+	margin-top:-120px;
+}
+
+.profile-data,.item-data label{
+	color: white;
+}
+
+.profile-data,.item-data .input-field{
+	margin-top: 10px;
+}
+
+.profile-btn{
+	margin-left: 10%;
+}
+
+.item-btn{
+	margin-left: 45%;
+}
+
+
+.tabs{
+	margin-bottom: 30px;
+}
+
+option{
+	color:#fff;
+}
+
+.home-nums{
+	font-size: 80px;
+	color: white;
+	
+}
+
+.home-font{
+	color: white;
+}
+
+.blue-font{
+	color: darkorchid;
+}
+@media only screen and (max-width: 600px) {
+	.logo{
+		display: none;
+	}
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .section{
+	margin-top:20px;
+}
+.section .createlink{
+	margin-top: 25px;
+	padding : 10px;
+	color: black;
+}
+.quizzes .collection-item{
+	color: darkorchid !important;
+}
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+main {
+    flex: 1 0 auto;
+  }
+footer textarea{
+	background-color: white;
+	border:none;
+	outline:none;
+	
+}
+.profileimg{
+	border-radius:50%;
+}
+.changeimg{
+	margin-left:250px;
+	margin-top:-160px;
+}
+
+.editprofile{
+	margin-left:10px;	
+	margin-top:5px;
+}
+ .changepassword{
+	margin-left:10px;	
+	margin-top:5px;
+}
+
+.notdotted{
+	border-bottom-style:solid !important;
+} */
+
+
+
+
+
+

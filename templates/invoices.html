@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- materialize -->
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/materialize.min.css">
+    <link rel="stylesheet" href="../static/css/materialize.css">
+    <link rel="stylesheet" href="../static/css/main.css">
+
+     <!-- Title logo font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <!-- Other font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600&display=swap" rel="stylesheet">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <title>Invoices</title>
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper navbar-efx">
+          <a href="#!" class="brand-logo logo-font">&nbsp &nbsp &nbspBILLBOARD</a>
+          <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="sass.html">Home</a></li>
+            <li><a href="sass.html">Downloads</a></li>
+            <li><a href="badges.html">Invoices</a></li>
+            <li><a href="collapsible.html">Cart</a></li>
+            <li><a href="mobile.html">Logout</a></li>
+          </ul>
+        </div>
+      </nav>
+      <br>
+    
+      <ul class="sidenav" id="mobile-demo">
+            <a href="#!" class="brand-logo logo-font mobile-logo" > &nbsp BILLBOARD</a>
+            <li><a href="sass.html">Home</a></li>
+            <li><a href="sass.html">Downloads</a></li>
+            <li><a href="badges.html">Invoices</a></li>
+            <li><a href="collapsible.html">Cart</a></li>
+            <li><a href="mobile.html">Logout</a></li>
+      </ul>
+
+
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col s12">
+              <ul class="tabs">
+                <li class="tab col s6" ><a  class="active" href="#test1" style="color: darkorchid;">Invoices sent</a></li>
+                <li class="tab col s6"><a href="#test2" style="color: darkorchid;">Invoices Received</a></li>
+                
+              </ul>
+            </div>
+            <div id="test1" class="col s12">
+              {% for store in Isent %}
+                <ul class="collapsible">
+                    <li>
+                      <div class="collapsible-header"><i class="material-icons">domain</i>{{store["receiver"]}}<span style="color:green" class="badge">{{store["status"]}}</span></div>
+                      <div class="collapsible-body">
+                        <table class="highlight responsive-table table-background centered">
+                          <thead>
+                          <tr class="table-header">
+                              <th>Product Details</th>
+                              <th>Time</th>
+                              <th>Total Price</th>
+                              <th>Actions</th>
+                          </tr>
+                          </thead>
+                  
+                          <tbody>
+                          <tr>
+                              <td>{{store["products"]}}</td>
+                              <td>{{store["time"]}}</td>
+                              <td>Rs.{{store["total"]}}</td>
+                              <td>
+                                <a href="/recart/{{store['id']}}" class="waves-effect waves-light btn teal darken-1">Re-Cart</a>
+                                <a class="waves-effect waves-light btn deep-orange">Delete</a>
+                              </td>
+                          </tr>
+                          </tbody>
+                      </table>            
+      
+                      
+
+
+
+                      </div>
+                    </li>
+                    
+                    </li>
+                  </ul>
+              {% endfor %}
+
+                
+            </div>
+            <div id="test2" class="col s12 item-data">
+              {% for store in Irec %}
+              <ul class="collapsible">
+                <li>
+                  <div class="collapsible-header"><i class="material-icons">domain</i>{{store["sender"]}}<span style="color:green" class="badge">Active</span></div>
+                  <div class="collapsible-body">
+                    <table class="highlight responsive-table table-background centered">
+                      <thead>
+                      <tr class="table-header">
+                          <th>Product Details</th>
+                          <th>Total Price</th>
+                          <th>Time</th>
+                          <th>Actions</th>
+                      </tr>
+                      </thead>
+              
+                      <tbody>
+                      <tr>
+                          <td>{{store["products"]}}</td>
+                          <td>Rs.{{store["total"]}}</td>
+                          <td>{{store["time"]}}</td>
+                          <td>
+                            <a href="/accept/{{store['id']}}" class="waves-effect waves-light btn teal darken-1">Accept</a>
+                            <a href="/decline/{{store['id']}}" class="waves-effect waves-light btn deep-orange">Reject</a>
+                          </td>
+                      </tr>
+                      </tbody>
+                  </table>      
+                  </div>
+                </li>
+                
+                </li>
+              </ul>
+              {%endfor%}
+
+
+            </div>
+           
+            
+
+
+          </div>
+        </div>
+    </div>
+
+
+
+    <script src="../static/js/init.js"></script>
+    <script src="../static/js/materialize.js"></script>
+    <script src="../static/js/materialize.min.js"></script>
+    <script src="../static/js/myjavascript.js"></script>
+    <script>
+        
+        
+          // Or with jQuery
+        
+          $(document).ready(function(){
+            $('.sidenav').sidenav();
+          });
+
+    </script>
+</body>
+</html>

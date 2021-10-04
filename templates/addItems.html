@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- materialize -->
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/materialize.min.css">
+    <link rel="stylesheet" href="../static/css/materialize.css">
+    <link rel="stylesheet" href="../static/css/main.css">
+
+     <!-- Title logo font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <!-- Other font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@600&display=swap" rel="stylesheet">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <title>Add Items</title>
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper navbar-efx">
+          <a href="#!" class="brand-logo logo-font">&nbsp &nbsp &nbspBILLBOARD</a>
+          <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="{{url_for("home")}}">Home</a></li>
+            <li><a href="{{url_for("account")}}">Account</a></li>
+            <li><a href="{{url_for("invoice")}}">Invoices</a></li>
+            <li><a href="{{url_for("bill")}}">Bills</a></li>
+            <li><a href="{{url_for("addItems")}}">AddItems</a></li>
+            <li><a href="{{url_for("cartdetails")}}">Cart</a></li>
+            <li><a href="{{url_for("logout")}}">Logout</a></li>
+          </ul>
+        </div>
+      </nav>
+      <br>
+    
+      <ul class="sidenav" id="mobile-demo">
+            <a href="#!" class="brand-logo logo-font mobile-logo" > &nbsp BILLBOARD</a>
+            <li><a href="{{url_for("home")}}">Home</a></li>
+            <li><a href="{{url_for("account")}}">Account</a></li>
+            <li><a href="{{url_for("invoice")}}">Invoices</a></li>
+            <li><a href="{{url_for("bill")}}">Bills</a></li>
+            <li><a href="{{url_for("addItems")}}">AddItems</a></li>
+            <li><a href="{{url_for("cartdetails")}}">Cart</a></li>
+            <li><a href="{{url_for("logout")}}">Logout</a></li>
+      </ul>
+
+
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col s12">
+              <ul class="tabs">
+                <li class="tab col s6" ><a  class="active" href="#test1" style="color: darkorchid;">Itemlist</a></li>
+                <li class="tab col s6"><a href="#test2" style="color: darkorchid;">Add Item</a></li>
+                
+              </ul>
+            </div>
+            <div id="test1" class="col s12">
+                <table class="highlight responsive-table table-background">
+                    <thead>
+                    <tr class="table-header">
+                        <th>Product Id</th>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                        <th>Discount</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+            
+                    <tbody>
+                    <tr>
+                      {% for item in item_lists %}
+                        <td>{{item["_id"]}}</td>
+                        <td>{{item["product_name"]}}</td>
+                        <td>Rs.{{item["price"]}}</td>
+                        <td>{{item["category"]}}</td>
+                        <td>Rs.{{item["discount"]}}</td>
+                        <td>
+                            <a href={{url_for("deleteItem",id=item["_id"])}} style="cursor:pointer;"><i style="color:black" class="material-icons">delete</i></a>
+                            <a href={{url_for("editItem",id=item["_id"])}} style="cursor:pointer;"><i style="color:black" class="material-icons">edit</i></a>
+                        </td>
+                    </tr>
+                    {%endfor%}
+                    </tbody>
+                </table>            
+
+
+
+                
+            </div>
+            <div id="test2" class="col s12 item-data">
+                <form method="POST">
+                <div class="input-field">
+                    <input placeholder="" id="Product_Name" name="Product_Name" type="text" class="validate">
+                    <label for="Product_Name">Product Name</label>
+                    </div>
+
+                    <div class="input-field">
+                        <select id="category" name="category">
+                            <option value="" disabled selected>Choose your option</option>
+                            {% for category in categories %}
+                            <option value={{category}}>{{category}}</option>
+                            {% endfor %}
+                          </select>
+                          <label for="category">Category</label>
+                    </div>
+
+                    <div class="input-field">
+                        <input id="price" name="price" type="text" class="validate">
+                        <label for="price">Price</label>
+                    </div>
+                    
+                    <div class="input-field">
+                        <input id="discount" name="discount" type="text" class="validate">
+                        <label for="discount">Discount</label>
+                    </div>
+      
+                    <br>
+                    <button class="btn waves-effect waves-light purple lighten-1 item-btn" type="submit" name="action">Add item</button>
+                    <br>
+                  </form>
+                </div>
+
+
+
+            </div>
+           
+            
+
+
+          </div>
+        </div>
+    </div>
+
+
+
+    <script src="../static/js/init.js"></script>
+    <script src="../static/js/materialize.js"></script>
+    <script src="../static/js/materialize.min.js"></script>
+    <script src="../static/js/myjavascript.js"></script>
+    <script>
+
+          $(document).ready(function(){
+            $('.sidenav').sidenav();
+          });
+
+    </script>
+</body>
+</html>
