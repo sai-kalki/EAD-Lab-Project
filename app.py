@@ -185,7 +185,30 @@ def deleteItem(id):
 @app.route("/editItem/<id>",methods=["POST","GET"])
 def editItem(id):
     if "orgoid" in session:
-        return redirect(url_for("addItems"))
+        orgoid = session["orgoid"]
+        user = users.find_one({"_id":orgoid})
+        categories = user["categories"].strip().split(',')
+        itemlists = items.find_one({"_id":id,"uid":orgoid})
+        if request.method=="POST":
+            name = request.form["Product_Name"]
+            item = items.find_one({"product_name":name})
+            print(item)
+            if item==None:
+                category = request.form.get("category")
+                price = request.form["price"]
+                discount = request.form["discount"]
+                items.update_one({"_id":id},{"$set":{"product_name":name,"price":int(price),"discount":int(discount),"category":category}})
+                return redirect(url_for("addItems"))
+            if item!=None and item["_id"]==id:
+                category = request.form.get("category")
+                price = request.form["price"]
+                discount = request.form["discount"]
+                items.update_one({"_id":id},{"$set":{"product_name":name,"price":int(price),"discount":int(discount),"category":category}})
+                return redirect(url_for("addItems"))
+            else:
+                return render_template("editItem.html",item=itemlists,categories=categories,invalid="Product name already exist")
+        else:
+            return render_template("editItem.html",item=itemlists,categories=categories,invalid="")
     else:
         return redirect(url_for("login"))
 
@@ -269,7 +292,10 @@ def deleteInv(id):
 def accept(id):
     if "orgoid" in session:
         orgoid = session["orgoid"]
-        bills.insert_one(invoices.find_one({"_id":id,"rid":orgoid}))
+        curr = invoices.find_one({"_id":id,"rid":orgoid})
+        curr.pop("status")
+        curr["time"] = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        bills.insert_one(curr)
         users.update_one({"_id":orgoid},{"$set":{"Brec":users.find_one({"_id":orgoid})["Brec"]+1}})
         sid = invoices.find_one({"_id":id,"rid":orgoid})["sid"]
         users.update_one({"_id":sid},{"$set":{"Bsent":users.find_one({"_id":sid})["Bsent"]+1}})
@@ -311,7 +337,49 @@ def recart(id):
 
 @app.route("/bills",methods=["POST","GET"])
 def bill():
-    return render_template("admin.html")
+    if "orgoid" in session:
+        id = session["orgoid"]
+        bsent = bills.find({"sid":id})
+        brec = bills.find({"rid":id})
+        billsent = []
+        for store in bsent:
+            bil = {}
+            bil["receiver"] = users.find_one({"_id":store["rid"]})["username"]
+            bil["time"] = store["time"]
+            bil["total"] = 0
+            bil["products"] = []
+            for item in store["items"]:
+                products = {}
+                itemdetails = items.find_one({"_id":item})
+                products["name"] = itemdetails["product_name"]
+                products["Quantity"] = store["items"][item]
+                products["price"] = itemdetails["price"]
+                products["total"] = products["price"]*products["Quantity"]
+                bil["total"] += products["total"]
+                bil["products"].append(products)
+            print(bil)
+            billsent.append(bil)
+        billrec = []
+        for store in brec:
+            bil = {}
+            bil["sender"] = users.find_one({"_id":store["sid"]})["username"]
+            bil["time"] = store["time"]
+            bil["total"] = 0
+            bil["products"] = []
+            for item in store["items"]:
+                products = {}
+                itemdetails = items.find_one({"_id":item})
+                products["name"] = itemdetails["product_name"]
+                products["Quantity"] = store["items"][item]
+                products["price"] = itemdetails["price"]
+                products["total"] = products["price"]*products["Quantity"]
+                bil["total"] += products["total"]
+                bil["products"].append(products)
+            print(bil)
+            billrec.append(bil)
+        return render_template("bills.html",bsen=billsent,brec=billrec)
+    else:
+        return redirect(url_for("login"))
 
 @app.route("/cart",methods=["POST","GET"])
 def cartdetails():

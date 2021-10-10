@@ -68,7 +68,7 @@
               {% for store in Isent %}
                 <ul class="collapsible">
                     <li>
-                      <div class="collapsible-header"><i class="material-icons">domain</i>{{store["receiver"]}}<span style="color:green" class="badge">{{store["status"]}}</span></div>
+                      <div class="collapsible-header"><i class="material-icons">domain</i>To: {{store["receiver"]}}<span style="color:green" class="badge">{{store["status"]}}</span></div>
                       <div class="collapsible-body">
                         <table class="highlight responsive-table table-background centered">
                           <thead>
@@ -110,7 +110,7 @@
               {% for store in Irec %}
               <ul class="collapsible">
                 <li>
-                  <div class="collapsible-header"><i class="material-icons">domain</i>{{store["sender"]}}<span style="color:green" class="badge">Active</span></div>
+                  <div class="collapsible-header"><i class="material-icons">domain</i>From: {{store["sender"]}}<span style="color:green" class="badge">Active</span></div>
                   <div class="collapsible-body">
                     <table class="highlight responsive-table table-background centered">
                       <thead>

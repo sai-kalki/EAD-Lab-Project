@@ -66,28 +66,29 @@
             
             <div id="test2" class="col s12 item-data">
                 <form method="POST">
+                <p style="color: white;text-align:center">{{invalid}}</p>
                 <div class="input-field">
-                    <input placeholder="" id="Product_Name" name="Product_Name" type="text" class="validate" autocomplete="off">
+                    <input style="color:white" placeholder="" value={{item["product_name"]}} id="Product_Name" name="Product_Name" type="text" class="validate" autocomplete="off">
                     <label for="Product_Name">Product Name</label>
                     </div>
 
                     <div class="input-field">
                         <select id="category" name="category" autocomplete="off">
-                            <option value="" disabled selected>Choose your option</option>
+                            <option style="color:white" value={{item["category"]}} disabled>Choose your option</option>
                             {% for category in categories %}
-                            <option value={{category}}>{{category}}</option>
+                            <option value={{category}} {% if category==item["category"] %}selected {%endif%}><span>{{category}}</span></option>
                             {% endfor %}
                           </select>
                           <label for="category">Category</label>
                     </div>
 
                     <div class="input-field">
-                        <input id="price" name="price" type="text" class="validate" autocomplete="off">
+                        <input style="color:white" id="price" value={{item["price"]}} name="price" type="text" class="validate" autocomplete="off">
                         <label for="price">Price</label>
                     </div>
                     
                     <div class="input-field">
-                        <input id="discount" name="discount" type="text" class="validate" autocomplete="off">
+                        <input style="color:white" value={{item["discount"]}} id="discount" name="discount" type="text" class="validate" autocomplete="off">
                         <label for="discount">Discount</label>
                     </div>
       

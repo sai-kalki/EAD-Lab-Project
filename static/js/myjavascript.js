@@ -20,5 +20,6 @@ function CopyClipboard(element) {
     $('.tabs').tabs();
     $('select').formSelect();
     $('.collapsible').collapsible();
+    $('.modal').modal();
   });
 

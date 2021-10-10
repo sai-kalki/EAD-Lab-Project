@@ -84,7 +84,16 @@
                         </div>
           
                         <br>
-                        <button class="btn waves-effect waves-light purple lighten-1 profile-btn" type="button" name="action">Upload Image</button>
+                        <a class="waves-effect waves-light btn modal-trigger purple lighten-1 profile-btn" href="#modal1">Upload Image</a>
+                        <div id="modal1" class="modal">
+                            <div class="modal-content">
+                              <h4 style="color:black">Choose your Organisation Image</h4>
+                              <input style="color:black" type="file" accept="image/*">
+                            </div>
+                            <div class="modal-footer">
+                              <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                            </div>
+                          </div>
                         <button class="btn waves-effect waves-light purple lighten-1 profile-btn" type="submit" name="action">Save Profile</button>
                         <br>
                         <br>
@@ -99,5 +108,10 @@
     <script src="../static/js/materialize.js"></script>
     <script src="../static/js/materialize.min.js"></script>
     <script src="../static/js/myjavascript.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.modal').modal();
+          });
+    </script>
 </body>
 </html>

@@ -5,6 +5,10 @@
 	font-family: 'Josefin Sans', sans-serif;
 }
 
+select option span {
+    color: #fff; /* no need for !important :) */
+}
+
 body{
 	background-color: darkorchid;
 }

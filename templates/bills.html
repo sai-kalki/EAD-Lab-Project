@@ -21,7 +21,7 @@
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <title>Invoices</title>
+    <title>Bills</title>
 </head>
 <body>
     <nav>
@@ -65,30 +65,33 @@
               </ul>
             </div>
             <div id="test1" class="col s12">
-              {% for store in Isent %}
+              {% for store in bsen %}
                 <ul class="collapsible">
                     <li>
-                      <div class="collapsible-header"><i class="material-icons">domain</i>{{store["receiver"]}}<span class="badge"><a class="waves-effect waves-light btn">button</a></span></div>
+                      <div class="collapsible-header"><i class="material-icons">domain</i>To: {{store["receiver"]}}<span style="color:green" class="badge">{{store["time"]}}</span></div>
                       <div class="collapsible-body">
                         <table class="highlight responsive-table table-background centered">
                           <thead>
                           <tr class="table-header">
-                              <th>Product Details</th>
-                              <th>Time</th>
+                              <th>Products</th>
+                              <th>Quantity</th>
+                              <th>Price</th>
                               <th>Total Price</th>
-                              <th>Actions</th>
                           </tr>
                           </thead>
                   
                           <tbody>
+                            {% for product in store["products"]%}
+                            <td>{{product["name"]}}</td>
+                            <td>{{product["Quantity"]}}</td>
+                            <td>{{product["price"]}}</td>
+                            <td>{{product["total"]}}</td>
+                            {%endfor%}
                           <tr>
-                              <td>{{store["products"]}}</td>
-                              <td>{{store["time"]}}</td>
-                              <td>Rs.{{store["total"]}}</td>
-                              <td>
-                                <a href="/recart/{{store['id']}}" class="waves-effect waves-light btn teal darken-1">Re-Cart</a>
-                                <a href="/deleteInv/{{store['id']}}" class="waves-effect waves-light btn deep-orange">Delete</a>
-                              </td>
+                            <td></td>
+                            <td></td>
+                            <td>Total Amount</td>
+                            <td>Rs.{{store["total"]}}</td>
                           </tr>
                           </tbody>
                       </table>            
@@ -102,35 +105,40 @@
                     
                     </li>
                   </ul>
-              {% endfor %}
-
+                  {%endfor%}
                 
             </div>
             <div id="test2" class="col s12 item-data">
-              {% for store in Irec %}
+              {% for store in brec %}
               <ul class="collapsible">
                 <li>
-                  <div class="collapsible-header"><i class="material-icons">domain</i>{{store["sender"]}}<span style="color:green" class="badge">Active</span></div>
+                  <div class="collapsible-header"><i class="material-icons">domain</i>From: {{store["sender"]}}<span style="color:green" class="badge">{{store["time"]}}</span></div>
                   <div class="collapsible-body">
                     <table class="highlight responsive-table table-background centered">
                       <thead>
                       <tr class="table-header">
                           <th>Product Details</th>
+                          <th>Quantity</th>
+                          <th>Price</th>
                           <th>Total Price</th>
-                          <th>Time</th>
-                          <th>Actions</th>
+                          
                       </tr>
                       </thead>
               
                       <tbody>
                       <tr>
-                          <td>{{store["products"]}}</td>
-                          <td>Rs.{{store["total"]}}</td>
-                          <td>{{store["time"]}}</td>
-                          <td>
-                            <a href="/accept/{{store['id']}}" class="waves-effect waves-light btn teal darken-1">Accept</a>
-                            <a href="/decline/{{store['id']}}" class="waves-effect waves-light btn deep-orange">Reject</a>
-                          </td>
+                          {% for product in store["products"]%}
+                          <td>{{product["name"]}}</td>
+                          <td>{{product["Quantity"]}}</td>
+                          <td>{{product["price"]}}</td>
+                          <td>{{product["total"]}}</td>
+                          {%endfor%}
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Total Amount</td>
+                        <td>Rs. {{store["total"]}}</td>
                       </tr>
                       </tbody>
                   </table>      
@@ -139,8 +147,8 @@
                 
                 </li>
               </ul>
-              {%endfor%}
-
+            
+              {% endfor %}
 
             </div>
            
